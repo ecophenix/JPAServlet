@@ -20,16 +20,13 @@ public class CommentBO {
 	
 	private List comments;
 	
-
 	public List allComment() throws Exception {
 		EntityManager entityManager = JPAUtility.getEntityManager();
 		
 		if(entityManager!=null) {
 			 comments=entityManager.createNamedQuery("Comment.findAll")
 		                .getResultList();
-		}
-		
-		 
+		}		 
 		return comments;
 	}
 
@@ -37,13 +34,14 @@ public class CommentBO {
 	public void addComment(Comment comment) throws Exception {
 	
 		EntityManager entityManager = JPAUtility.getEntityManager();	entityManager.getTransaction().begin();
-	
-		entityManager.persist(comment);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-		JPAUtility.close();		
-		System.out.println("Entity saved.");
-	
+		
+		if(entityManager!=null) {
+			entityManager.persist(comment);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			JPAUtility.close();		
+			System.out.println("Entity saved.");
+		}
 	}
 	
 

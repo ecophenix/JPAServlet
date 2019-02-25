@@ -22,7 +22,7 @@ public class AddComment extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	            throws IOException {
 		 response.getWriter().println("Hello");
-	    }
+	  }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{

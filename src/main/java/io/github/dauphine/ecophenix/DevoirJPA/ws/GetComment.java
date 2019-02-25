@@ -34,6 +34,7 @@ public class GetComment extends HttpServlet {
 			 response.getWriter().println("Hello");
 			}
 			catch (Exception e){
-					}
+				e.printStackTrace();
+			}
 	    }
 }

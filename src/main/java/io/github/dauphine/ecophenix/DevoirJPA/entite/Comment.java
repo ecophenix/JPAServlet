@@ -11,13 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="COMMENT", schema="PUBLIC")
-
-	@NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")
+@NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")
 public class Comment {
 	  
-	   private int id;
-	   private String description;
-	   private Timestamp date;
+   private int id;
+   private String description;
+   private Timestamp date;
 
 	@Id @GeneratedValue
 	@Column(name = "id")
@@ -29,7 +28,7 @@ public class Comment {
 		this.id = id;
 	}
 	
-	   @Column(name="DESCRIPTION")
+	@Column(name="DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
