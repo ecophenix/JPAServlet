@@ -1,13 +1,17 @@
 package io.github.dauphine.ecophenix.DevoirJPA.entite;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="COMMENT", schema="PUBLIC")
@@ -16,9 +20,10 @@ public class Comment {
 	  
    private int id;
    private String description;
-   private Timestamp date;
+   private Date date;
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id")
 	public int getId() {
 		return id;
@@ -37,12 +42,14 @@ public class Comment {
 		this.description = description;
 	}
 
+	
 	@Column(name="TIMESTAMP")
-	public Timestamp getDate() {
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	   

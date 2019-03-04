@@ -1,15 +1,17 @@
 package io.github.dauphine.ecophenix.DevoirJPA.ws;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
 
-import io.github.dauphine.ecophenix.DevoirJPA.BO.CommentBO;
+import io.github.dauphine.ecophenix.DevoirJPA.dao.CommentDAO;
  
 @WebServlet(
         name = "GetCommentServlet",
@@ -21,17 +23,27 @@ public class GetComment extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	  // Injection de notre EJB (Session Bean Stateless)
+    @EJB
+    private CommentDAO   commentDAO;
+
 	
 
 	@SuppressWarnings("unused")
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
-	            throws IOException {
+	            throws ServletException,IOException {
 			 
 		 try
 			{
-			 List comments=CommentBO.getInstance().allComment();
+			 response.setContentType("text/plain;charset=UTF-8");
+			 String c=commentDAO.allComments();
+			 String comments=CommentDAO.getInstance().allComments();
 			 
-			 response.getWriter().println("Hello");
+			 if(StringUtils.isEmpty(comments)) {
+				 response.getWriter().println("OK");
+			 }else {
+				 response.getWriter().println(comments);
+			 }	 
 			}
 			catch (Exception e){
 				e.printStackTrace();
